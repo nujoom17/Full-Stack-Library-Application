@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up Page</title>
+    <style>
+        *{
+            margin: 0;
+        }
+    
+        nav ul {
+            display: flex;
+            height: 4rem;
+            color: white;
+            background-color: rgb(0, 0, 0, 0.7);
+            list-style: none;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        a{
+           
+            color: white;
+        }
+        form a {
+            text-decoration:underline;
+            color: black;
+        }
+    
+       .form-layout {
+            width: 73%;
+            border: 3px solid rgb(0, 196, 0);
+            border-radius: 30px;
+            margin: 7rem auto;
+            padding-top: 5rem;
+            display: grid;
+            grid-template-columns: 0.2fr 1fr 1fr 0.2fr;
+            grid-row-gap: 1em;
+            grid-column-gap: 1em;
+            padding-bottom: 5rem;
+            background-color: rgb(255, 255, 255, 0.95);
+                    }
+@media screen and (max-width: 800px) {
+  .form-layout {
+    width: 96%;
+  }
+}
+.form-layout h2,
+p {
+  margin: auto;
+  grid-column: 1/-1;
+}
+
+.form-layout label {
+  grid-column: 2/3;
+}
+.form-layout input {
+  grid-column: 3/4;
+}
+.form-layout #firstname-alert,
+#lastname-alert,
+#alert-msg1,
+#alert-msg2,
+#number-alert,
+#email-alert {
+  grid-column: 3/4;
+  color: white;
+  border-radius: 7px;
+}
+.form-layout #final-check {
+  grid-column: 2/4;
+  text-align: center;
+  font-size: x-large;
+}
+
+.form-layout button {
+  grid-column: 2/4;
+  background: rgb(0, 196, 0);
+  color: white;
+  border-radius: 30px;
+  border: none;
+  padding: 0.2rem 0.7rem 0.2rem 0.7rem;
+  font-size: 1.2rem;
+}
+
+#alert-msg1,
+#alert-msg2,
+#number-alert {
+  border: 2.5px solid yellow;
+}
+
+#pwd-strength {
+  height: 2rem;
+  grid-column: 3/4;
+  border-radius: 12px;
+}
+#pwd-strength2 {
+  height: 2rem;
+  /* grid-column: 3/4; */
+  border-radius: 12px;
+}
+#bar {
+  grid-column: 3/4;
+  width: 10%;
+  background: red;
+  font-size: 10px;
+  height: 0.5rem;
+  border-radius: 12px;
+  margin-top: -1.5rem;
+}
+#bar2 {
+  width: 10%;
+  background: red;
+  font-size: 10px;
+  height: 0.5rem;
+  border-radius: 12px;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+  footer{
+            color:white;
+            background-color: black;
+            margin-top: 15rem;
+            height: 7rem;
+        }
+
+        #err{
+            grid-row: 2/3;
+            grid-column: 2/4;
+            background-color: red;
+            color: white;
+        }
+        #err p{
+            text-align: center;
+        }
+
+        
+        
+    </style>
+</head>
+
+<body>
+        <header>
+            <nav role="navigation">
+                <ul class="nav navbar-nav">
+                   <a href="/sign-in">Sign In</a>
+                </ul>
+            </nav>
+        </header>
+    <br>
+    <h2 align="center">Welcome aboard!</h2>
+    <form class="form-layout" action="/sign-up" method="POST">
+        <h2>Registration Form</h2>
+    
+        <p>already have an account? <a href="/sign-in">Sign in Here</a> </p>
+        
+        <label id="err">
+        <% if(typeof errors !="undefined" ){ %>
+            <p>Invalid Credentials, please fill in all fields:</p>
+            <% errors.forEach((error)=>{ %>
+                <ul>
+                <li><%=error.msg%></li>
+                </ul>
+                    <% }); %>
+                        <% } %>
+        </label>
+       
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" name="firstname" oninput="checkFirstName()">
+        <label id="firstname-alert"></label>
+    
+        <label for="lastname">Last Name</label>
+        <input type="text" id="lastname" name="lastname" oninput="checkLastName()">
+        <label id="lastname-alert"></label>
+    
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="abc@example.domain(.subdomain)" name="email" oninput="checkEmail()">
+        <label id="email-alert"></label>
+    
+        <label for="number">Phone Number</label>
+        <input type="text" id="number" placeholder="10-digit phone number" name="number" oninput="checkNumber()">
+        <label id="number-alert" style="color: black;">Examples of valid formats for number: XXXXXXXXXX or XXX-XXX-XXXX or
+            XXX.XXX.XXXX or XXX XXX XXXX</label>
+    
+        <label for="dob">Date of Birth</label>
+        <input type="date" name="DOB">
+    
+        <label for="pass">Set Password</label>
+        <input type="password" placeholder="min 8 characters" name="password" id="password" oninput="passwordStrength()">
+        <label id="pwd-strength">Password Strength: <b>Weak</b>
+        </label>
+        <div id="bar"></div>
+    
+        <label id="alert-msg1" style="color: black;">
+            Password must contain at least 8 characters, with minimum of one:
+            upper-case, lower-case & number</label>
+    
+        <label for="pass">Confirm Password</label>
+        <input type="password" id="password-confirm" name="password2" oninput="confirmPassword()" placeholder="verify password" >
+        <label id="alert-msg2" style="color: black;">Passwords should match</label>
+    
+    
+        <label>Gender</label>
+        <label for="gender1">Male</label>
+        <input type="radio" id="gender1" name="gender" value="male">
+    
+        <label for="gender2">Female</label>
+        <input type="radio" id="gender2" name="gender" value="female">
+    
+        <label for="gender3">Other</label>
+        <input type="radio" id="gender3" name="gender" value="other">
+    
+    
+    
+        <label>Authorization Type<br><b>NB: Only admins have access to add/modify/delete entries</b></label>
+        <select name="authorization">
+            <option value="standard">Standard User</option>
+            <option value="admin">Admin</option>
+        </select>
+
+    
+        <label for="remember-me">Remember Me</label>
+        <input type="checkbox" value="remember-me">
+    
+        <label for="terms">I accept your <a href="#">terms and conditions</a></label>
+        <input type="checkbox" value="terms" checked>
+    
+        <label id="final-check"></label>
+    
+    
+        <button type="submit">Create New Account</button>
+    
+    </form>
+    <footer>
+        <p align="center">Designed by Nujoom A Kadar</p>
+    
+    </footer>
+    <script>
+        function checkFirstName() {
+                let firstNameInput = document.getElementById("firstname").value.trim()
+                let firstNameAlert = document.getElementById("firstname-alert")
+                console.log("hello")
+
+                if (firstNameInput == "" || firstNameInput.length < 3) {
+                    firstNameAlert.style.background = " red"
+                    firstNameAlert.innerText = "First Name cannot be empty or short"
+                    console.log("empty name")
+                    
+                }
+                else {
+                    firstNameAlert.style.background = "green"
+                    firstNameAlert.innerText = "Valid first name";
+                    
+                }
+            }
+
+            
+
+            
+            function checkEmail(){
+                checkFirstName()
+                let emailInput = document.getElementById("email");
+                let emailRegex = /^([\w\_\-\.]+)@([\w\_\-\.]+)\.([a-z\-]{2,3})(\.[a-z]{2,3})?$/;
+                let emailLabel = document.getElementById("email-alert")
+                if (emailRegex.test(emailInput.value.trim())){
+                    emailLabel.style.background = " green"
+                    emailLabel.innerText = "Email is of valid format"
+                    // console.log("valid") 
+                    
+                }
+                else {
+                    emailLabel.style.background = " red"
+                    emailLabel.innerText = "Invalid Email"
+                    // console.log("invalid")
+                    
+                }
+            }
+
+            function checkNumber() {
+                checkFirstName()
+            
+                checkEmail()
+                let mobileRegex = /^(\d{3})[\-\.\s]?(\d{3})[\-\.\s]?(\d{4})$/
+                let mobileLabel = document.getElementById("number-alert")
+                let numberInput = document.getElementById("number")
+                if (mobileRegex.test(numberInput.value.trim())) {
+                    mobileLabel.style.background = " green"
+                    mobileLabel.innerText = "Valid number format"
+                    mobileLabel.style.color = "white"
+                    // console.log("valid")
+                
+
+                }
+                else {
+                    mobileLabel.style.background = "red"
+                    mobileLabel.innerText = "Invalid number format"
+                    mobileLabel.style.color = "white"
+                    // console.log("invalid")
+                }
+            }
+
+            function checkPassword() {
+    
+                let passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+                let passwordInput = document.getElementById("password")
+                let passwordLabel = document.getElementById("alert-msg1")
+
+
+                if (passwordRegex.test(passwordInput.value)) {
+                    passwordLabel.style.background = "green"
+                    passwordLabel.innerText = "Password is Valid"
+                    passwordLabel.style.color = "white"
+                    passwordLabel.style.border = "none"
+                   
+
+                }
+                else {
+                    passwordLabel.style.background = "red"
+                    passwordLabel.innerText = "Invalid Password. Try again"
+                    passwordLabel.style.color = "white"
+                    passwordLabel.style.border = "none"
+                   
+                }
+            }
+
+            function passwordStrength() {
+                let passwordInput = document.getElementById("password")
+                let bar = document.getElementById("bar")
+                let label = document.getElementById("pwd-strength")
+                let medium = /([a-zA-Z]|[a-z0-9]){8,}/
+                let strong = /((?=.*\d)(?=.*[A-Z])(?=.*[\_\.@#$])).{8,}/
+
+                if (!medium.test(passwordInput.value) && !strong.test(passwordInput.value)) {
+                    bar.style.background = "red"
+                    bar.style.width = "16%";
+                    label.innerText = "Password Strength: Weak"
+
+                }
+                else if (strong.test(passwordInput.value)) {
+                    bar.style.background = "green"
+                    bar.style.width = "80%";
+                    label.innerText = "Password Strength: Strong"
+                }
+                else if (medium.test(passwordInput.value)) {
+                    bar.style.background = "yellow"
+                    bar.style.width = "50%";
+                    label.innerText = "Password Strength: Medium"
+                }
+            }
+
+            function confirmPassword() {
+                checkFirstName()
+                checkEmail()
+                checkNumber()
+                checkPassword()
+                let passwordInput = document.getElementById("password")
+                let passwordLabel = document.getElementById("alert-msg1")
+                let passwordInput2 = document.getElementById("password-confirm")
+                let passwordLabel2 = document.getElementById("alert-msg2")
+                passwordLabel2.style.color = "white"
+              
+                    if (passwordInput.value == passwordInput2.value) {
+                        passwordLabel2.style.background = "green"
+                        passwordLabel2.innerText = "Passwords are matching"
+                        passwordLabel2.style.border = "none"
+                        
+                    }
+
+                    else {
+                        passwordLabel2.style.background = "red"
+                        passwordLabel2.innerText = "Error. Passwords do not match"
+                        passwordLabel2.style.border = "none"
+                       
+                    }
+            }
+
+
+            
+    </script>
+</body>
+</html>

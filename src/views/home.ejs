@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>
+        <%=title%>
+    </title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="navbar navbar-bright navbar-fixed-top" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+            </div>
+            <nav class="collapse navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
+                    <%for(let i=0;i<nav.length;i++){%>
+                
+                        <li>
+                            <a href="<%=nav[i]['link']%>">
+                                <%=nav[i]['name']%>
+                            </a>
+                        </li>
+                        <%}%>
+                </ul>
+                <ul class="nav navbar-right navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                class="glyphicon glyphicon-search"></i></a>
+                        <ul class="dropdown-menu" style="padding:12px;">
+                            <form class="form-inline">
+                                <button type="submit" class="btn btn-default pull-right"><i
+                                        class="glyphicon glyphicon-search"></i></button><input type="text"
+                                    class="form-control pull-left" placeholder="Search">
+                            </form>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <div style="width: 50vw; margin: auto;"
+        class="d-flex flex-column min-vh-100 text-align-center align-items-center justify-content-center align-items-center">
+        <h1><i class="fab fa-node-js fa-3x"></i></h1>
+        <h2>Welcome to the Library Application <%=name%>! </h2>
+        <h3>Your current user role is: <%=role%></h3>
+        <br>
+        <% if(access_error!=""){ %>
+            <h2 class="access_error"><%= access_error %></h2>
+            <% } %>
+        <br>
+        <a class="btn-lg btn-primary" href="/books">View Books List</a>
+        <br>
+        <br>
+        <a class="btn-lg btn-primary" href="/authors">View Authors List</a>
+        <br>
+        <br>
+        <h5>Not <%=name%>? <a href="/sign-out">Sign Out Here</a></h5>
+    </div>
+
+
+    <hr>
+
+    <div class="container" id="footer">
+        <div class="row">
+            <div class="col col-sm-12">
+
+
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <hr>
+
+    <footer style="margin-top: 25rem">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <ul class="list-inline">
+                        <li><i class="icon-facebook icon-2x"></i></li>
+                        <li><i class="icon-twitter icon-2x"></i></li>
+                        <li><i class="icon-google-plus icon-2x"></i></li>
+                        <li><i class="icon-pinterest icon-2x"></i></li>
+                    </ul>
+
+                </div>
+                <div class="col-sm-6">
+                    <p class="pull-right">Developed by Nujoom</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- script references -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In page</title>
+    <style>
+        *{
+            margin:0;
+        }
+        nav ul{
+            display: flex;
+            height: 4rem;
+            color: white;
+            background-color: rgb(0,0,0,0.7);
+            list-style: none;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        form a{
+            text-decoration:underline
+           
+        }
+        nav a{
+            color: white;
+        }
+
+        form{
+            margin-top: 4rem;
+            margin-right: auto;
+            margin-left: auto;
+            width: 60%;
+            border: 2.5px solid black;
+            padding: 3rem;
+        }
+        button{
+            padding: 15px;
+        }
+        footer{
+            color:white;
+            background-color: black;
+            margin-top: 15rem;
+            height: 7rem;
+            
+        }
+        #msg{
+            background-color: lightsalmon;
+        }
+        #notif {
+                color: white;
+                background-color: darkolivegreen;
+                font-weight: bold;
+            }
+            .alert-success {
+            background-color: green;
+            color: white;
+            padding: 2rem;
+            }
+            .alert-err {
+            padding: 2rem;
+            background-color: red;
+            color: white;
+            }
+      
+    </style>
+</head>
+<body>
+    <header>
+    <nav>
+        <ul>
+            <li><a href="/sign-up">Create New Account</a></li>
+        </ul>
+        </nav>
+    </header>
+        <form action="/sign-in" method="POST">
+
+            <label id="msg">
+                <% if(success_msg!=""){ %>
+                    <div class="alert-success">
+                        <%= success_msg %>
+                    </div>
+                    <% } %>
+                    <% if(error_msg!=""){ %>
+                        <div class="alert-err">
+                            <%= error_msg %>
+                        </div>
+                        <% } %>
+                    <% if(error!=""){ %>
+                        <div class="alert-err">
+                            <%= error %>
+                        </div>
+                        <% } %>
+            </label>
+            <h2>Sign In to an existing Account</h2>
+            
+            <br>
+            <label type="">Email</label>
+            <input type="text" name="email" id="username">
+            <br>
+            <br>
+            <label type="">Password</label>
+            <input type="password" name="password" id="pwd">
+            <br>
+            <br>
+            <button type="submit" id="sbtn">Sign In</button>
+            <br>
+            <br>
+            <label id="notif"></label>
+            <br>
+            <br>
+            <hr>
+            <div>
+                <h3>New here?  <a href="/sign-up">Sign up here</a></h3>
+            </div>
+        </form>
+        <footer>
+            <p align="center">Designed by Nujoom A Kadar</p>
+
+        </footer>
+    <script>
+      document.getElementById("sbtn").addEventListener("click",()=>{
+          document.getElementById("notif").innerText="Redirecting you, please wait........"
+
+      })
+    </script>
+</body>
+</html>
